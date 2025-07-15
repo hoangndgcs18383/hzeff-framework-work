@@ -1,17 +1,15 @@
-
-/*
 namespace SAGE.Framework.Core
 {
+    using SAGE.Framework.Extensions;
     using DG.Tweening;
     using Sirenix.OdinInspector;
-    using Extensions;
     using UnityEngine;
 
     public class VibrationManager : BehaviorSingleton<VibrationManager>
     {
         private const string VibrationKey = "EnableVibration";
         private Camera _camera;
-        
+
         protected override void Awake()
         {
             base.Awake();
@@ -25,7 +23,7 @@ namespace SAGE.Framework.Core
                 Handheld.Vibrate();
             }
         }
-        
+
         [Button]
         public void ShakeCamera(float duration = 0.5f, float strength = 0.1f)
         {
@@ -46,4 +44,4 @@ namespace SAGE.Framework.Core
             return PlayerPrefs.GetInt(VibrationKey, 1) == 1;
         }
     }
-}*/
+}

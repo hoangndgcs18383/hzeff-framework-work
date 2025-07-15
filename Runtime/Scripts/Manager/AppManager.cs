@@ -1,15 +1,9 @@
-/*using System;
-using Cysharp.Threading.Tasks;
-using GoodsTripleSort;
-using PlayAd.SDK.Ads;
-using SAGE.Framework.Core.Addressable;
-using SAGE.Framework.Core.Extensions;
-using SAGE.Framework.Core.UI;
-using SAGE.Framework.SDK;
-using UnityEngine.Profiling;
-
 namespace SAGE.Framework.Core
 {
+    using Cysharp.Threading.Tasks;
+    using Addressable;
+    using SAGE.Framework.Extensions;
+    using SAGE.Framework.UI;
     using UnityEngine;
 
     public class AppManager : BehaviorSingleton<AppManager>
@@ -50,11 +44,11 @@ namespace SAGE.Framework.Core
 #else
             Application.targetFrameRate = 300;
 #endif
-            DeviceBasedPipelineManager.Instance.ApplyOptimalPipeline();
+            //DeviceBasedPipelineManager.Instance.ApplyOptimalPipeline();
             IsLoading = true;
             await UIManager.Instance.DoInitializeAsync();
-            await ModelManager.Instance.InitializeAsync();
-            await SDKHandler.Instance.LoginAsync();
+            //await ModelManager.Instance.InitializeAsync();
+            //await SDKHandler.Instance.LoginAsync();
             _fillAmount = 0.2f;
             await _uiLoading.SetProgressTweenAsync(0.2f);
 #if !UNITY_EDITOR
@@ -62,16 +56,17 @@ namespace SAGE.Framework.Core
 #endif
             await _uiLoading.SetProgressTweenAsync(1f);
             await UIManager.Instance.FadeInLoadingAsync();
-            AudioManager.Instance.PlayBackgroundMusic(SoundKey.MainMenu);
-            await UIManager.Instance.ShowAndLoadScreenAsync<UIMainMenu>(BaseScreenAddress.UIMAINMENU);
+            //AudioManager.Instance.PlayBackgroundMusic(SoundKey.MainMenu);
+            //await UIManager.Instance.ShowAndLoadScreenAsync<UIMainMenu>(BaseScreenAddress.UIMAINMENU);
             IsLoading = false;
             await UniTask.WaitForSeconds(0.1f);
-            SDKHandler.Instance.ShowBannerAdAsync();
+            //SDKHandler.Instance.ShowBannerAdAsync();
         }
-        
+
 
         public async UniTask ShowOpenAppAsync()
         {
+#if PLAY_ADS
             float delay = 0;
             if (PlayAdSupport.IsLoggeds && !PlayAdSupport.GetUser().BuyNoAds)
             {
@@ -91,13 +86,14 @@ namespace SAGE.Framework.Core
             }
             
             if (!PlayAdSupport.GetUser().BuyNoAds) PlayAdSupport.ShowOpenAppAd();
+#endif
         }
 
         public async UniTask LoadingScreen<T>(string baseScreen, float duration = 3f) where T : BaseScreen
         {
             UIManager.Instance.HideAllPreviousScreens();
             IsLoading = true;
-            SDKHandler.Instance.ShowBannerAdAsync(AdBannerSize.MediumRectangle);
+            //SDKHandler.Instance.ShowBannerAdAsync(AdBannerSize.MediumRectangle);
             _uiLoading.SetProgress(0);
             await _uiLoading.SetProgressTweenAsync(0.1f, 0.15f);
             //Debug.Log($"Before Total Memory: {GC.GetTotalMemory(false) / 1024 / 1024}MB");
@@ -110,14 +106,14 @@ namespace SAGE.Framework.Core
             await _uiLoading.SetProgressTweenAsync(1f, duration);
             await UIManager.Instance.FadeInLoadingAsync();
             IsLoading = false;
-            SDKHandler.Instance.ShowBannerAdAsync();
+            //SDKHandler.Instance.ShowBannerAdAsync();
             await UIManager.Instance.ShowAndLoadScreenAsync<T>(baseScreen);
         }
-        
+
 
         private void OnApplicationQuit()
         {
-            UserProfileService.Sync();
+            //UserProfileService.Sync();
         }
     }
-}*/
+}

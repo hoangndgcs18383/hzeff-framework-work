@@ -1,4 +1,4 @@
-/*namespace SAGE.Framework.Core.UI
+namespace SAGE.Framework.UI
 {
     using System.Collections.Generic;
     using MEC;
@@ -44,4 +44,4 @@
             loadingCircle.alpha = 0;
         }
     }
-}*/
+}

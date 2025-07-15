@@ -4,11 +4,17 @@
   "displayName": "Framework",
   "description": "This is an framework",
   "dependencies": {
-    "com.unity.addressables": "1.21.21",
-    "com.cysharp.unitask": "git+https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.1.0"
+    "com.unity.addressables": "1.21.21"
   },
   "author": {
     "name": "Hzeff",
     "email": "hoangndgcs18383@gmail.com"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Packages",
+      "description": "The package includes: DOTween Pro, More Effective Coroutines PRO v3.13.0, Odin Inspector and Serializer, SRDebugger - Console Tools On-Device",
+      "path": "Samples~/Packages"
+    }
+  ]
 }

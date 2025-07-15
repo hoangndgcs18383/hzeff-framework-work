@@ -1,7 +1,6 @@
-using SAGE.Framework.Core.Extensions;
-
-namespace SAGE.Framework.Core.Log
+namespace SAGE.Framework.Log
 {
+    using Extensions;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
@@ -42,7 +41,6 @@ namespace SAGE.Framework.Core.Log
             {
                 entries.RemoveAt(entries.Count - 1);
             }
-            
         }
 
         private string GetCleanStackTrace(int skipFrames)

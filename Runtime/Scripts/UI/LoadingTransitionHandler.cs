@@ -1,13 +1,12 @@
-/*using EasyTransition;
-
-namespace SAGE.Framework.Core.UI
+/*namespace SAGE.Framework.Core.UI
 {
+    using EasyTransition;
     using System;
 #if UNITASK_SUPPORT
     using Cysharp.Threading.Tasks;
 #else
     using System.Threading.Tasks;
-#endif    
+#endif
     using UnityEngine;
     using System.Collections;
 
@@ -17,7 +16,7 @@ namespace SAGE.Framework.Core.UI
         [SerializeField] TransitionSettings transitionSettingsForFadeOut;
         [SerializeField] private CanvasGroup fadeCanvasGroup;
         [SerializeField] private float fadeDuration = 1f;
-        
+
         private void Awake()
         {
             fadeCanvasGroup.alpha = 0;

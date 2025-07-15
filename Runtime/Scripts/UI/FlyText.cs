@@ -1,4 +1,4 @@
-/*namespace SAGE.Framework.Core.UI
+namespace SAGE.Framework.UI
 {
     using Core;
     using DG.Tweening;
@@ -24,4 +24,4 @@
             });
         }
     }
-}*/
+}

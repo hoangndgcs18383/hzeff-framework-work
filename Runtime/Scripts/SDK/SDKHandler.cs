@@ -1,13 +1,15 @@
-/*namespace SAGE.Framework.SDK
+namespace SAGE.Framework.SDK
 {
+    using Extensions;
+    using UI;
     using Core;
-    using Core.Extensions;
-    using Core.UI;
-    using Core.Helper;
-    using Logger = Core.Log.Logger;
+    using Logger = Core.Logger;
+
+#if PLAY_ADS
     using PlayAd.SDK.Leaderboard;
     using PlayAd.SDK.Ads.Fyber;
     using PlayAd.SDK.Ads;
+#endif
     using System;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
@@ -16,7 +18,6 @@
 
     public class SDKHandler : Singleton<SDKHandler>
     {
-
         public event Action OnLoginSuccess = delegate { };
         public event Action OnBeginRequest = delegate { };
         public event Action OnEndRequest = delegate { };
@@ -36,15 +37,16 @@
         public const string PRESS_SHOP = "open_shop";
         public const string IAP = "in_app_purchase";
         public const string PASS_LEVEL = "pass_level";
+
         public bool IsBuyNoAds
         {
 #if UNITY_EDITOR
             get => true;
-#else  
+#else
             get { return PlayAdSupport.GetUser().BuyNoAds; }
 #endif
         }
-        
+
         public bool IsNewBieRewardAvailable
         {
 #if UNITY_EDITOR
@@ -70,14 +72,16 @@
 
             Debug.Log("Reconnected");
             await LoginAsync(true);
-
+#if PLAY_ADS
             _isReconnecting = PlayAdSupport.IsLoggeds;
             if (PlayAdSupport.IsLoggeds) _internetCheck.StopPing();
+#endif
             Logger.Log("Reconnected", "Reconnecting to the server...");
         }
 
         public void InitializeIAP()
         {
+#if PLAY_ADS
             List<IAPInitializeBuilder> initializeBuilders = new
                 List<IAPInitializeBuilder>
                 {
@@ -89,10 +93,12 @@
                 };
 
             PlayAdSupport.IAP.Initialize(initializeBuilders);
+#endif
         }
 
         public void Track(string key, string paramName, object paramValue)
         {
+#if PLAY_ADS
             switch (paramValue)
             {
                 case string value:
@@ -108,10 +114,12 @@
                     PlayAdSupport.Analytics.LogEvent(key, paramName, intValue);
                     break;
             }
+#endif
         }
 
         public async UniTask LoginAsync(bool isReconnect = false)
         {
+#if PLAY_ADS
             var result = await PlayAdSupport.LoginAsync();
             if (result.isSuccess)
             {
@@ -140,7 +148,7 @@
                         /*UIManager.Instance.ShowAndLoadScreen<UIReward>(BaseScreenAddress.UIREWARD, new UIRewardData
                         {
                             Gems = gem - UserProfileService.GetUserProfile().Gem,
-                        }, CanvasType.Loading);#1#
+                        }, CanvasType.Loading);*/
                         FlyTextManager.Instance.ShowFlyText(
                             $"You have received {gem - UserProfileService.GetUserProfile().Gem} gems",
                             Color.green);
@@ -187,30 +195,22 @@
                 UserProfileService.GetUserProfile().Gem = PlayAdSupport.GetUser().Money;
                 UserProfileService.LocalSync();
             }
+#endif
         }
 
         public async UniTask<bool> BuyRemoveAds()
         {
+#if PLAY_ADS
             if (!IsInternetAvailable()) return false;
             OnBeginRequest.Invoke();
             var result = await PlayAdSupport.IAP.Purchase(RemoveAdsPackage);
             OnEndRequest.Invoke();
 
             return result.isSuccess;
+#endif
+            return false;
         }
-
-        public async void ShowFirstRewardAsync()
-        {
-            bool isInternetAvailable = Application.internetReachability != NetworkReachability.NotReachable;
-            if (!isInternetAvailable)
-            {
-                //FlyTextManager.Instance.ShowFlyText(Constants.NoInternet, Color.red);
-                return;
-            }
-
-            PlayAdSupport.ShowPopUpFirstReward();
-        }
-
+#if PLAY_ADS
         public async UniTask<bool> ShowRewardedAdShopAsync(string adRewardType = AdRewardType.shopGemRewardCD,
             string placement = null, Action<int> onSuccess = null,
             Action onFailed = null, Action onCanceled = null)
@@ -235,9 +235,9 @@
                 onSuccess?.Invoke(GetAdCountDownInfo(adRewardType));
                 /*FlyTextManager.Instance.ShowFlyText(
                     $"You have received {PlayAdSupport.GetUser().GetConfig<int>(GameConfigName.ShopDiamondScale)} gems",
-                    Color.green);#1#
+                    Color.green);*/
                 /*UserProfileService.GetUserProfile().Gem = PlayAdSupport.GetUser().Money;
-                UserProfileService.Sync();#1#
+                UserProfileService.Sync();*/
             }
             else
             {
@@ -270,7 +270,7 @@
                 UserProfileService.GetUserProfile().Gem = PlayAdSupport.GetUser().Money;
                 UserProfileService.LocalSync();
             }
-            #1#
+            */
 
             OnEndRequest.Invoke();
             return result;
@@ -371,5 +371,6 @@
         {
             PlayAdSupport.HideBanner();
         }
+#endif
     }
-}*/
+}

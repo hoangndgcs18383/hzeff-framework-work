@@ -1,6 +1,5 @@
-/*namespace SAGE.Framework.Core
+namespace SAGE.Framework.UI
 {
-    using UI;
     using Extensions;
     using System.Collections.Generic;
     using UnityEngine;
@@ -36,4 +35,4 @@
             _flyTextQueue.Enqueue(flyText);
         }
     }
-}*/
+}

@@ -1,9 +1,8 @@
-/*using DG.Tweening;
-using SAGE.Framework.Core.Extensions;
-using Sirenix.OdinInspector;
-
 namespace SAGE.Framework.Core
 {
+    using DG.Tweening;
+    using SAGE.Framework.Extensions;
+    using Sirenix.OdinInspector;
     using System;
     using MEC;
     using UnityEngine;
@@ -204,8 +203,8 @@ namespace SAGE.Framework.Core
             {
                 InitializeBackgroundMusicSource();
             }
-            
+
             _backgroundMusicSource.mute = !enable;
         }
     }
-}*/
+}

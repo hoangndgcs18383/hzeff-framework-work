@@ -1,4 +1,4 @@
-namespace SAGE.Framework.Core.PoolingSystem
+namespace SAGE.Framework.Core
 {
     public interface IPoolable
     {

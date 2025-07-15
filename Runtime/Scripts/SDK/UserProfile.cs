@@ -1,16 +1,17 @@
-/*#if ENABLE_WORKING
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
-using PlayAd.SDK.Ads;
-using PlayAd.SDK.Leaderboard;
-using SAGE.Framework.Core;
-using UnityEngine;
-
 namespace SAGE.Framework.SDK
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using Cysharp.Threading.Tasks;
+    using Newtonsoft.Json;
+#if PLAY_ADS
+    using PlayAd.SDK.Ads;
+    using PlayAd.SDK.Leaderboard;
+#endif
+    using SAGE.Framework.Core;
+    using UnityEngine;
+
     public static class UserProfileService
     {
         private static UserProfile _userProfile;
@@ -27,12 +28,13 @@ namespace SAGE.Framework.SDK
         public static event Action<TypeBooster, int> OnBoosterChanged = delegate { };
 
         public static event Action<string> OnUserNameChanged;
-
+#if PLAY_ADS
         private static PlayAdUser _playAdUser;
+#endif
 
         public static UniTask LoadUserProfile()
         {
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser = PlayAdSupport.GetUser();
 #endif
 
@@ -41,13 +43,17 @@ namespace SAGE.Framework.SDK
                 byte[] data = File.ReadAllBytes(GetSavePath());
                 UserProfile =
                     JsonConvert.DeserializeObject<UserProfile>(EncryptionUtility.DecryptStringFromBytes_Aes(data));
-
+#if PLAY_ADS
                 Debug.Log("User profile locally" + JsonConvert.SerializeObject(UserProfile)
                                                  + ", playAdUser: " + JsonConvert.SerializeObject(_playAdUser));
+#else
+                Debug.Log("User profile loaded from local file: " + JsonConvert.SerializeObject(UserProfile));
+#endif
             }
             else if (!File.Exists(GetSavePath()))
             {
-                Debug.LogWarning(JsonConvert.DeserializeObject<GameData>(_playAdUser.GameData));
+#if PLAY_ADS
+                Debug.Log(JsonConvert.DeserializeObject<GameData>(_playAdUser.GameData));
                 UserProfile = new UserProfile
                 {
                     Gem = _playAdUser.Money,
@@ -55,8 +61,21 @@ namespace SAGE.Framework.SDK
                     HighScore = _playAdUser.HighRecord,
                     GameData = JsonConvert.DeserializeObject<GameData>(_playAdUser.GameData) ?? new GameData()
                 };
-
-
+#else
+                UserProfile = new UserProfile
+                {
+                    Gem = 0,
+                    Coins = 0,
+                    HighScore = 0,
+                    GameData = new GameData
+                    {
+                        CurrentLevel = 1,
+                        CurrentTimeChange = 0,
+                        DisplayName = $"Player_{Guid.NewGuid().ToString().Substring(0, 8)}",
+                        BoosterDatas = new List<BoosterData>()
+                    }
+                };
+#endif
                 Debug.Log("User profile not found, load from server: " + JsonConvert.SerializeObject(UserProfile));
             }
 
@@ -65,7 +84,7 @@ namespace SAGE.Framework.SDK
                 UserProfile.GameData.DisplayName = $"Player_{Guid.NewGuid().ToString().Substring(0, 8)}";
                 SetDisplayName(UserProfile.GameData.DisplayName);
             }
-            
+
             OnUserProfileLoaded?.Invoke(UserProfile);
             return UniTask.CompletedTask;
         }
@@ -80,7 +99,7 @@ namespace SAGE.Framework.SDK
         public static async UniTask Sync()
         {
             LocalSync();
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser.GameData = JsonConvert.SerializeObject(UserProfile.GameData);
             await _playAdUser.SaveAllAsync().AsUniTask();
             Debug.Log("User profile synced to server: " + JsonConvert.SerializeObject(_playAdUser));
@@ -94,7 +113,7 @@ namespace SAGE.Framework.SDK
             if (File.Exists(GetSavePath()))
             {
                 File.Delete(GetSavePath());
-#if USE_SDK
+#if PLAY_ADS
                 _playAdUser.ResetData();
 #endif
             }
@@ -108,7 +127,7 @@ namespace SAGE.Framework.SDK
         public static void AddGems(int amount)
         {
             UserProfile.Gem += amount;
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser.AddMoneyAsync(amount);
 #endif
             Sync();
@@ -129,7 +148,7 @@ namespace SAGE.Framework.SDK
             if (UserProfile.Coins < price) return false;
             UserProfile.Coins -= price;
 
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser.Coin -= price;
 #endif
             Sync();
@@ -141,7 +160,7 @@ namespace SAGE.Framework.SDK
             if (price <= 0) return false;
             if (UserProfile.Gem < price) return false;
             UserProfile.Gem -= price;
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser.UseMoneyAsync(price);
 #endif
             Sync();
@@ -152,11 +171,11 @@ namespace SAGE.Framework.SDK
         {
             if (score <= UserProfile.HighScore) return;
             UserProfile.HighScore = score;
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser.HighRecord = score;
-#endif
             PlayadLeaderboard.SetScore(score);
             PlayadLeaderboard.ResetRankedUp();
+#endif
             Sync();
         }
 
@@ -164,10 +183,10 @@ namespace SAGE.Framework.SDK
         {
 /*#if USE_SDK
             return _playAdUser.HighRecord;
-#endif#1#
+#endif*/
             return UserProfile.HighScore;
         }
-        
+
         public static int GetCurrentLevel()
         {
             return UserProfile.GameData.CurrentLevel;
@@ -196,7 +215,7 @@ namespace SAGE.Framework.SDK
         public static void AddCoins(int dataCoins, bool notify = true)
         {
             UserProfile.Coins += dataCoins;
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser.Coin += dataCoins;
 #endif
             if (notify) Sync();
@@ -205,7 +224,7 @@ namespace SAGE.Framework.SDK
         public static void SetDisplayName(string displayName)
         {
             UserProfile.GameData.DisplayName = displayName;
-#if USE_SDK
+#if PLAY_ADS
             _playAdUser.GameData = JsonConvert.SerializeObject(UserProfile.GameData);
 #endif
             OnUserNameChanged?.Invoke(displayName);
@@ -305,4 +324,3 @@ namespace SAGE.Framework.SDK
         }
     }
 }
-#endif*/

@@ -1,4 +1,4 @@
-/*namespace SAGE.Framework.Core.UI
+namespace SAGE.Framework.UI
 {
     using Cysharp.Threading.Tasks;
     using DG.Tweening;
@@ -42,4 +42,4 @@
             UpdateFillHandlePosition();
         }
     }
-}*/
+}

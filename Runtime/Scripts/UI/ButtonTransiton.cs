@@ -1,12 +1,10 @@
-
-/*
 namespace SAGE.Framework.Core.UI
 {
 #if UNITY_EDITOR
     using UnityEditor.Animations;
     using UnityEditor;
 #endif
-    using Extensions;
+    using SAGE.Framework.Extensions;
     using Sirenix.OdinInspector;
     using UnityEngine.UI;
     using UnityEngine;
@@ -77,4 +75,4 @@ namespace SAGE.Framework.Core.UI
             }
         }
     }
-}*/
+}

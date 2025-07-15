@@ -1,16 +1,13 @@
-using SAGE.Framework.Core.Extensions;
-
-namespace SAGE.Framework.Core.PoolingSystem
+namespace SAGE.Framework.Core
 {
+    using SAGE.Framework.Extensions;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-
-#if ENABLE_ADDRESS
     using UnityEngine.AddressableAssets;
     using UnityEngine.ResourceManagement.AsyncOperations;
-#endif
+
 
     public class PoolManager : BehaviorSingleton<PoolManager>
     {
@@ -28,9 +25,9 @@ namespace SAGE.Framework.Core.PoolingSystem
         public class PoolConfig
         {
             public string poolTag;
-#if ENABLE_ADDRESS
+
             public AssetReferenceGameObject prefabReference;
-#endif
+
             public int initialSize = 10;
             public int maxSize = 100;
             public float growthFactor = 0.2f;
@@ -63,9 +60,7 @@ namespace SAGE.Framework.Core.PoolingSystem
 
             var newPool = new Pool(
                 config.poolTag,
-#if ENABLE_ADDRESS
                 config.prefabReference,
-#endif
                 config.initialSize,
                 config.maxSize,
                 config.growthFactor,
@@ -116,9 +111,9 @@ namespace SAGE.Framework.Core.PoolingSystem
         {
             private Queue<GameObject> _inactive = new();
             private List<GameObject> _active = new();
-#if ENABLE_ADDRESS
+
             private AssetReferenceGameObject _prefabRef;
-#endif
+
             private GameObject _loadedPrefab;
             private string _poolTag;
             private int _maxSize;
@@ -128,9 +123,7 @@ namespace SAGE.Framework.Core.PoolingSystem
 
             public Pool(
                 string poolTag,
-#if ENABLE_ADDRESS
                 AssetReferenceGameObject prefabRef,
-#endif
                 int initialSize,
                 int maxSize,
                 float growthFactor,
@@ -138,9 +131,9 @@ namespace SAGE.Framework.Core.PoolingSystem
                 bool asyncLoad)
             {
                 _poolTag = poolTag;
-#if ENABLE_ADDRESS
+
                 _prefabRef = prefabRef;
-#endif
+
                 _maxSize = maxSize;
                 _growthFactor = growthFactor;
                 _autoScale = autoScale;
@@ -158,7 +151,6 @@ namespace SAGE.Framework.Core.PoolingSystem
 
             private IEnumerator AsyncInitialize(int initialSize)
             {
-#if ENABLE_ADDRESS
                 var loadHandle = _prefabRef.LoadAssetAsync();
                 yield return loadHandle;
 
@@ -171,9 +163,6 @@ namespace SAGE.Framework.Core.PoolingSystem
                 {
                     Debug.LogError($"Failed to load {_prefabRef.RuntimeKey}");
                 }
-#else
-                yield return null;
-#endif
             }
 
             private IEnumerator CreateObjectsAsync(int count)
@@ -194,7 +183,6 @@ namespace SAGE.Framework.Core.PoolingSystem
 
             private void SyncInitialize(int initialSize)
             {
-#if ENABLE_ADDRESS
                 _loadedPrefab = _prefabRef.Asset as GameObject;
                 for (int i = 0; i < initialSize; i++)
                 {
@@ -203,7 +191,6 @@ namespace SAGE.Framework.Core.PoolingSystem
                     obj.GetOrAddComponent<PooledObject>().PoolTag = _poolTag;
                     _inactive.Enqueue(obj);
                 }
-#endif
             }
 
             public GameObject Spawn(Vector3 position, Quaternion rotation)

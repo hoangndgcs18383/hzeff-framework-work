@@ -1,10 +1,11 @@
-namespace SAGE.Framework.Core.Log
+namespace SAGE.Framework.Core
 {
+    using Log;
     using UnityEngine;
 
     public static class Logger
     {
-        [System.Diagnostics.Conditional("ENABLE_LOG")]
+        //[System.Diagnostics.Conditional("ENABLE_LOG")]
         public static void Log(string tag, object message, Object context = null, Color color = default)
         {
             DebugHistoryManager.Instance.Log(message.ToString(), tag, LogType.Log);
@@ -17,7 +18,7 @@ namespace SAGE.Framework.Core.Log
             Debug.Log(string.Format("{0} {1}", $"<b><color=green>[{tag}]</color></b>", mMessage, context));
         }
 
-        [System.Diagnostics.Conditional("ENABLE_LOG")]
+        //[System.Diagnostics.Conditional("ENABLE_LOG")]
         public static void LogWarning(string tag, object message, Object context = null, Color color = default)
         {
             DebugHistoryManager.Instance.Log(message.ToString(), tag, LogType.Warning);
@@ -30,7 +31,7 @@ namespace SAGE.Framework.Core.Log
             Debug.LogWarning(string.Format("{0} {1}", $"<b><color=green>[{tag}]</color></b>", mMessage, context));
         }
 
-        [System.Diagnostics.Conditional("ENABLE_LOG")]
+        //[System.Diagnostics.Conditional("ENABLE_LOG")]
         public static void LogError(string tag, object message, Object context = null, Color color = default)
         {
             DebugHistoryManager.Instance.Log(message.ToString(), tag, LogType.Error);

@@ -1,19 +1,19 @@
-/*using System;
-using UnityEngine.Serialization;
-
-namespace SAGE.Framework.Core.Helper
+namespace SAGE.Framework.Extensions
 {
+    using System;
+#if PLAY_ADS
     using PlayAd.SDK.Ads;
+    using SAGE.Framework.SDK;
+#endif
     using System.Collections;
     using SAGE.Framework.Core.UI;
-    using SAGE.Framework.SDK;
     using Sirenix.OdinInspector;
     using UnityEngine.UI;
     using UnityEngine;
 
-
     public class AdsCDHelper : MonoBehaviour
     {
+#if PLAY_ADS
         [SerializeField] private bool useCoinRewardAnimation = true;
         [SerializeField] private Button rewardAdButton;
 
@@ -24,7 +24,7 @@ namespace SAGE.Framework.Core.Helper
 
         [SerializeField] private CountDownButton countDownButton;
 
-        public event Action onRewardAdButtonClicked = delegate { }; 
+        public event Action onRewardAdButtonClicked = delegate { };
         public event Action onStartAd = delegate { };
         public event Action onCompleteAd = delegate { };
         public event Action onFailedAd = delegate { };
@@ -66,10 +66,7 @@ namespace SAGE.Framework.Core.Helper
                     onCompleteAd.Invoke();
                     UserProfileService.AddCoins(rewardCoinsReward);
                 }
-            }, () =>
-            {
-                onFailedAd.Invoke();
-            });
+            }, () => { onFailedAd.Invoke(); });
         }
 
         public void CheckCDAds()
@@ -97,5 +94,6 @@ namespace SAGE.Framework.Core.Helper
             AdRewardType.levelUpCD,
             AdRewardType.unlockSkinCD
         };
+#endif
     }
-}*/
+}

@@ -1,4 +1,4 @@
-﻿namespace SAGE.Framework.Core.Extensions
+﻿namespace SAGE.Framework.Extensions
 {
     using UnityEngine;
 

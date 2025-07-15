@@ -1,4 +1,4 @@
-namespace SAGE.Framework.Core.UI
+namespace SAGE.Framework.UI
 {
     using Extensions;
     using UnityEngine;

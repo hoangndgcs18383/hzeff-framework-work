@@ -1,10 +1,10 @@
-using System.Globalization;
-using System.Security.Cryptography;
-using System.Text;
-using UnityEngine;
-
-namespace SAGE.Framework.Core.Utils
+namespace SAGE.Framework.SDK
 {
+    using System.Globalization;
+    using System.Security.Cryptography;
+    using System.Text;
+    using UnityEngine;
+
     public static class PlayerPrefsSafe
     {
         private const string _privateCode = "0QX6QXZ8gWTW9Z6Z9QX6QXZ9gWTW9Z6Z9";
@@ -41,7 +41,7 @@ namespace SAGE.Framework.Core.Utils
             PlayerPrefs.SetString(key, value);
             SaveEncryption(key, _typeString, value);
         }
-        
+
         public static void SetBool(string key, bool value)
         {
             PlayerPrefs.SetInt(key, value ? 1 : 0);
@@ -66,7 +66,7 @@ namespace SAGE.Framework.Core.Utils
         {
             return GetString(key, "");
         }
-        
+
         public static bool GetBool(string key)
         {
             return GetBool(key, false);
@@ -104,7 +104,7 @@ namespace SAGE.Framework.Core.Utils
 
             return PlayerPrefs.GetString(key, defaultValue);
         }
-        
+
         private static bool GetBool(string key, bool defaultValue)
         {
             int value = PlayerPrefs.GetInt(key, defaultValue ? 1 : 0);

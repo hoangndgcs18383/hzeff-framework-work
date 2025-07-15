@@ -1,7 +1,6 @@
-using System;
-
-namespace SAGE.Framework.Core.Helper
+namespace SAGE.Framework.Extensions
 {
+    using System;
     using System.Collections;
     using UnityEngine;
 
@@ -13,6 +12,7 @@ namespace SAGE.Framework.Core.Helper
 
         void Start()
         {
+            DontDestroyOnLoad(gameObject);
             StartCoroutine(PingRepeatedly());
         }
 

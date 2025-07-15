@@ -1,11 +1,14 @@
-/*namespace SAGE.Framework.Core.Helper
+namespace SAGE.Framework.Extensions
 {
+#if PLAY_ADS
     using PlayAd.SDK.Ads;
     using SAGE.Framework.SDK;
+#endif
     using UnityEngine;
 
     public class PopupNativeHelper : MonoBehaviour
     {
+#if PLAY_ADS
         [SerializeField] private PlayAdAdmobNativeAd nativeAds;
 
         private void OnEnable()
@@ -44,5 +47,6 @@
                 if (nativeAds != null) nativeAds.Hide();
             }
         }
+#endif
     }
-}*/
+}
