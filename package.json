@@ -4,7 +4,8 @@
   "displayName": "Framework",
   "description": "This is an framework",
   "dependencies": {
-    "com.unity.addressables": "1.21.21"
+    "com.unity.addressables": "1.21.21",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.1.0"
   },
   "author": {
     "name": "Hzeff",
