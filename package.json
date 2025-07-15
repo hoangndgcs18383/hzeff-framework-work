@@ -2,12 +2,12 @@
   "name": "com.hzeff.framework",
   "version": "0.0.1",
   "displayName": "Framework",
-  "description": "This is an framewordk",
+  "description": "This is an framework",
   "unity": "2022.3.31",
   "unityRelease": "0b5",
   "dependencies": {
-    "com.[company-name].some-package": "1.0.0",
-    "com.[company-name].other-package": "2.0.0"
+    "packages": "file:../Editor/Packages",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.10"
   },
   "author": {
     "name": "Hzeff",
