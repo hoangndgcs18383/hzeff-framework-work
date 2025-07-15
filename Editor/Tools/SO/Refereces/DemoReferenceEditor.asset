@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34120fa763a441bba876b3a494ea4db3, type: 3}
+  m_Name: DemoReferenceEditor
+  m_EditorClassIdentifier: 
+  group: Demo
+  className: DemoAddress
+  getNameMethod: GetName
+  addresses:
+  - key: Demo
+    labels: []
+    isAddressable: 1
+    asset: {fileID: 5000301562170342327, guid: 5ea94d04c3cf8ec41a6837e83cd25c79, type: 3}
+    reference:
+      m_AssetGUID: 5ea94d04c3cf8ec41a6837e83cd25c79
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1

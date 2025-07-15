@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34120fa763a441bba876b3a494ea4db3, type: 3}
+  m_Name: BaseScreenReferenceEditor
+  m_EditorClassIdentifier: 
+  group: BaseScreen
+  className: BaseScreenAddress
+  getNameMethod: GetName
+  addresses:
+  - key: UIGameplay
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: 2340ce4b06284344b88099f8db519ab7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIMainMenu
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: da1da674fe1bf7946ba37930368a3faa
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIUnlockReward
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: c4562f579d028064aa8cde4c4482914e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UILevelComplete
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: 4392f9084dc20c54d9a1dc8b45845af7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIShop
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: 807e83ce70480e544b7c59f54306a8d1
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIFail
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: 3a138f92a00cf6e40b70172095e1055c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIOutOfStock
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: eefcfaae0e1253d49aeceae3d515f69c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIEditDisplayName
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: b3d352d2bc1a50d42ac9045d04e16e88
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIChooseBooster
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: ce6eb0de0e19ced4f8d565eee80b10d2
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIPause
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: f60e6e56f5e3b344eb9e5631430c954c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UILeaderboard
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: 07cfef8e99ec5cd4f94da2445faa4b36
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIOutOfStuck
+    labels: []
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: eefcfaae0e1253d49aeceae3d515f69c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UIExits
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: 8d63035d0d93a5c489879ac64a6eeb8f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - key: UISetting
+    labels:
+    - BaseScreen
+    isAddressable: 1
+    asset: {fileID: 0}
+    reference:
+      m_AssetGUID: 848526cc48136874ebc539f889052264
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  Folder: 

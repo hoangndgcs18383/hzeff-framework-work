@@ -1,0 +1,16 @@
+{
+  "name": "com.hzeff.framework",
+  "version": "0.0.1",
+  "displayName": "Framework",
+  "description": "This is an framewordk",
+  "unity": "2022.3.31",
+  "unityRelease": "0b5",
+  "dependencies": {
+    "com.[company-name].some-package": "1.0.0",
+    "com.[company-name].other-package": "2.0.0"
+  },
+  "author": {
+    "name": "Hzeff",
+    "email": "hoangndgcs18383@gmail.com"
+  }
+}

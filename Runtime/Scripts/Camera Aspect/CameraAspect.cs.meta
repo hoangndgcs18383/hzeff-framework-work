@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3832b5d5922121848a4051e1f3e499b3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 232880
+  packageName: Connect - Game Template (2021 LTS)
+  packageVersion: 1.0.1
+  assetPath: Assets/Ilumisoft/Connect/Assets/Scripts/Core/Camera Aspect/CameraAspect.cs
+  uploadId: 587035

@@ -1,0 +1,27 @@
+// This file is auto-generated. DO NOT EDIT
+
+namespace {0}
+{
+    public static class {1}
+    {
+        public static string {2}(string key)
+        {
+            switch (key)
+            {
+{3}
+            }
+            return null;
+        }
+        
+        public static bool IsResources(string key)
+        {
+            switch (key)
+            { 
+{4}
+            }
+            return false;
+        }
+        
+{5}
+    }
+}
