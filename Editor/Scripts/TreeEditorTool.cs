@@ -1,7 +1,6 @@
-#if UNITY_EDITOR
-namespace SAGE.Framework.Core.Tools.Editor
+namespace SAGE.Framework.Core.Tools
 {
-    /*using Sirenix.OdinInspector.Editor;
+    using Sirenix.OdinInspector.Editor;
     using UnityEditor;
     using UnityEngine;
 
@@ -22,6 +21,5 @@ namespace SAGE.Framework.Core.Tools.Editor
             tree.AddAllAssetsAtPath("List Addressable", rootPath + "/Refereces", typeof(ScriptableObject));
             return tree;
         }
-    }*/
+    }
 }
-#endif

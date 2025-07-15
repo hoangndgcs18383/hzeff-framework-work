@@ -1,12 +1,10 @@
-﻿using System;
-//using Sirenix.OdinInspector;
-using UnityEngine;
-#if ENABLE_ADDRESS
-using UnityEngine.AddressableAssets;
-#endif
-
-namespace SAGE.Framework.Core.Tools.Editor
+﻿namespace SAGE.Framework.Core.Tools
 {
+    using System;
+    using Sirenix.OdinInspector;
+    using UnityEngine;
+    using UnityEngine.AddressableAssets;
+
     [Serializable]
     public class AddressReferenceConfig
     {
@@ -16,12 +14,9 @@ namespace SAGE.Framework.Core.Tools.Editor
         public string[] labels;
         public bool isAddressable;
 
-        //[HideIf("isAddressable")] [Required] 
-        public UnityEngine.Object asset;
-#if ENABLE_ADDRESS
-        [Tooltip("This is the asset that will be referenced in code.")]
-        [ShowIf("isAddressable")]
-        [Required] public AssetReference reference;
-#endif
+        [HideIf("isAddressable")] [Required] public UnityEngine.Object asset;
+
+        [Tooltip("This is the asset that will be referenced in code.")] [ShowIf("isAddressable")] [Required]
+        public AssetReference reference;
     }
 }

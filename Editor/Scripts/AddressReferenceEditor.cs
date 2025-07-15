@@ -1,35 +1,28 @@
-﻿using UnityEngine.AddressableAssets;
-
-namespace SAGE.Framework.Core.Tools.Editor
+﻿namespace SAGE.Framework.Core.Tools
 {
-#if UNITY_EDITOR
+    using Sirenix.OdinInspector;
+    using UnityEngine.AddressableAssets;
     using UnityEditor;
     using Object = UnityEngine.Object;
-#endif
     using System.Collections.Generic;
-    //using Sirenix.OdinInspector;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "AddressReferenceEditor", menuName = "SAGE/Tools/AddressReferenceEditor")]
-    public class AddressReferenceEditor : ScriptableObject
+    public partial class AddressReferenceEditor : ScriptableObject
     {
-        //[Title("General")] [Required] 
-        public string group;
+        [Title("General")] [Required] public string group;
 
-        //[Title("Template")] [FoldoutGroup("Require Template")] [Required]
+        [Title("Template")] [FoldoutGroup("Require Template")] [Required]
         public string className;
 
-        //[FoldoutGroup("Require Template")] [Required]
+        [FoldoutGroup("Require Template")] [Required]
         public string getNameMethod = "GetName";
 
-        //[Title("Address References")] 
-        public List<AddressReferenceConfig> addresses;
+        [Title("Address References")] public List<AddressReferenceConfig> addresses;
 
-#if UNITY_EDITOR
-        //[FolderPath] 
-        [SerializeField] private string Folder;
+        [FolderPath] [SerializeField] private string Folder;
 
-        //[Button]
+        [Button]
         public void Insert()
         {
             addresses.Clear();
@@ -47,9 +40,7 @@ namespace SAGE.Framework.Core.Tools.Editor
                     {
                         group
                     },
-#if ENABLE_ADDRESS
                     reference = reference,
-#endif
                 });
             }
         }
@@ -71,6 +62,5 @@ namespace SAGE.Framework.Core.Tools.Editor
 
             return assets;
         }
-#endif
     }
 }

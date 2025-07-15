@@ -1,52 +1,44 @@
-using System;
-using System.Linq;
-
-#if UNITY_EDITOR
-namespace SAGE.Framework.Core.Tools.Editor
+namespace SAGE.Framework.Core.Tools
 {
-    //using Sirenix.OdinInspector;
+    using Sirenix.OdinInspector;
+    using System;
+    using UnityEngine;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
     using UnityEditor;
-#if ENABLE_ADDRESS
     using UnityEditor.AddressableAssets;
     using UnityEditor.AddressableAssets.Settings;
     using UnityEngine.AddressableAssets;
-#endif
-    using UnityEngine;
 
     [CreateAssetMenu(menuName = "SAGE/Tools/AddressLibTool")]
     public class AddressLibTool : ScriptableObject
     {
-        //[Title("Template")] [FoldoutGroup("Require Template")] [Required] [Sirenix.OdinInspector.FilePath]
+        [Title("Template")] [FoldoutGroup("Require Template")] [Required] [Sirenix.OdinInspector.FilePath]
         public string templatePath;
 
-       // [FoldoutGroup("Require Template")] [Required] [FolderPath]
+        [FoldoutGroup("Require Template")] [Required] [FolderPath]
         public string generatePath;
 
-        //[FoldoutGroup("Require Template")]
+        [FoldoutGroup("Require Template")]
         public string namespaceName;
 
         [SerializeField] private List<AddressReferenceEditor> screenReferences = new List<AddressReferenceEditor>();
 
-        [Space]
-      //  [ReadOnly]
-      //  [HideLabel]
-       // [ProgressBar(0, 100, ColorGetter = "GetBarColor")]
-        [SerializeField] private float ProcessB = 0f;
+        [Space] [ReadOnly] [HideLabel] [ProgressBar(0, 100, ColorGetter = "GetBarColor")] [SerializeField]
+        private float ProcessB = 0f;
 
         private bool CompleteBuild => ProcessB >= 100f || ProcessB <= 0f;
-        
+
         private Color GetBarColor(float value)
         {
             return Color.Lerp(Color.red, Color.green, MathF.Pow(value / 100f, 2));
         }
-        
-      //  [PropertySpace(20)]
-     //   [EnableIf("CompleteBuild")]
-     //   [Button(ButtonSizes.Gigantic)]
+
+        [PropertySpace(20)]
+        [EnableIf("CompleteBuild")]
+        [Button(ButtonSizes.Gigantic)]
         public async void Build()
         {
             screenReferences.Clear();
@@ -62,7 +54,7 @@ namespace SAGE.Framework.Core.Tools.Editor
             }
 
             DeleteAllGeneratedScripts();
-            
+
             for (int i = 0; i < screenReferences.Count; i++)
             {
                 string template =
@@ -79,14 +71,13 @@ namespace SAGE.Framework.Core.Tools.Editor
 
                     if (screen.isAddressable)
                     {
-#if ENABLE_ADDRESS
                         AssignAddress(screen.reference, screenReferences[i].group, screen.key,
                             screen.labels);
                         sb.AppendLine("\t\t\t\tcase \"" + screen.key + "\":");
                         sb.AppendLine("\t\t\t\t\treturn \"" +
                                       GetGuid(screen.reference) + "\";");
-#endif
-                        
+
+
                         ProcessB = (index + 1) * 100 / screenReferences[i].addresses.Count;
                         index++;
                         await Task.Delay(100);
@@ -97,10 +88,10 @@ namespace SAGE.Framework.Core.Tools.Editor
                 sb.Clear();
 
                 string resourcesFolder = "LocalAssets";
-                Object[] resources = Resources.LoadAll(resourcesFolder, typeof(Object));
+                UnityEngine.Object[] resources = Resources.LoadAll(resourcesFolder, typeof(UnityEngine.Object));
 
                 //clear in resources
-                foreach (Object resource in resources)
+                foreach (UnityEngine.Object resource in resources)
                 {
                     Debug.Log(resource.name);
                     string path = AssetDatabase.GetAssetPath(resource);
@@ -115,13 +106,12 @@ namespace SAGE.Framework.Core.Tools.Editor
 
                     if (!screen.isAddressable)
                     {
-#if ENABLE_ADDRESS
                         AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
                         AddressableAssetEntry entry =
                             settings.FindAssetEntry(screen.reference.AssetGUID);
                         if (entry != null)
                             settings.RemoveAssetEntry(entry.guid);
-#endif
+
                         sb.AppendLine("\t\t\t\tcase \"" + screen.key + "\":");
                         sb.AppendLine("\t\t\t\t\treturn true;");
                         string path = Path.Combine(Application.dataPath, resourcesFolder);
@@ -138,7 +128,7 @@ namespace SAGE.Framework.Core.Tools.Editor
 
                         File.Copy(assetPath, newPath);
                         ProcessB = (i + 1) * 100 / screenReferences.Count;
-                        Debug.Log($"Copying {ProcessB} to { (i + 1) * 100 / screenReferences.Count}");
+                        Debug.Log($"Copying {ProcessB} to {(i + 1) * 100 / screenReferences.Count}");
                         await Task.Delay(100);
                     }
                 }
@@ -182,7 +172,7 @@ namespace SAGE.Framework.Core.Tools.Editor
             }
         }
 
-        //[Button]
+        [Button]
         private void ParseTemplate()
         {
             StringBuilder sb = new StringBuilder();
@@ -205,7 +195,7 @@ namespace SAGE.Framework.Core.Tools.Editor
             AssetDatabase.Refresh();
         }
 
-#if ENABLE_ADDRESS
+
         private void AssignAddress<T>(T data, string groupName, string address, string[] labels)
             where T : AssetReference
         {
@@ -230,9 +220,8 @@ namespace SAGE.Framework.Core.Tools.Editor
             if (schema == null)
                 schema = group.AddSchema<AddressableAssetGroupSchema>();
         }
-#endif
 
-#if ENABLE_ADDRESS
+
         private string GetGuid<T>(T data) where T : AssetReference
         {
             AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
@@ -240,7 +229,5 @@ namespace SAGE.Framework.Core.Tools.Editor
                 settings.FindAssetEntry(data.AssetGUID);
             return entry.guid;
         }
-#endif
     }
 }
-#endif

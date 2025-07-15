@@ -12,9 +12,29 @@
   },
   "samples": [
     {
-      "displayName": "Packages",
-      "description": "The package includes: DOTween Pro, More Effective Coroutines PRO v3.13.0, Odin Inspector and Serializer, SRDebugger - Console Tools On-Device",
-      "path": "Samples~/Packages"
+      "displayName": "DOTween Pro",
+      "description": "DOTween Pro",
+      "path": "Samples~/Packages/DOTween Pro"
+    },
+    {
+      "displayName": "More Effective Coroutines PRO",
+      "description": "More Effective Coroutines PRO v3.13.0",
+      "path": "Samples~/Packages/More Effective Coroutines PRO v3.13.0"
+    },
+    {
+      "displayName": "Odin Inspector and Serializer",
+      "description": "Odin Inspector and Serializer",
+      "path": "Samples~/Packages/Odin Inspector and Serializer"
+    },
+    {
+      "displayName": "SRDebugger - Console Tools On-Device",
+      "description": "SRDebugger - Console Tools On-Device",
+      "path": "Samples~/Packages/SRDebugger - Console Tools On-Device"
+    },
+    {
+      "displayName": "Tools",
+      "description": "The package includes: AddressLibTool",
+      "path": "Samples~/Tools"
     }
   ]
 }

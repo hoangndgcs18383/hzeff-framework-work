@@ -1,4 +1,4 @@
-namespace SAGE.Framework.Core.Tools.Editor
+namespace SAGE.Framework.Core.Tools
 {
     using System;
     using UnityEditor;
