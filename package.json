@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "displayName": "Framework",
   "description": "This is an framework",
-  "unityRelease": "0b5",
   "dependencies": {
     "packages": "file:../Editor/Packages",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.10"
