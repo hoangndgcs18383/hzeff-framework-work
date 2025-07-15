@@ -4,7 +4,7 @@
   "displayName": "Framework",
   "description": "This is an framework",
   "dependencies": {
-    "packages": "file:../Editor/Packages/DOTween Pro.unitypackage"
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git"
   },
   "author": {
     "name": "Hzeff",
